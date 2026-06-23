@@ -1,0 +1,58 @@
+<h2>Actualizar Comic</h2>
+
+<form [formGroup]="miForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="titulo">Título</label>
+    <input id="titulo" formControlName="titulo"/>
+    <div *ngIf="miForm.get('titulo')?.invalid && miForm.get('titulo')?.touched">
+      <div *ngIf="miForm.get('titulo')?.errors?.['required']">Título es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="autor">Autor</label>
+    <input id="autor" formControlName="autor"/>
+    <div *ngIf="miForm.get('autor')?.invalid && miForm.get('autor')?.touched">
+      <div *ngIf="miForm.get('autor')?.errors?.['required']">Autor es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="editorial">Editorial</label>
+    <input id="editorial" formControlName="editorial"/>
+    <div *ngIf="miForm.get('editorial')?.invalid && miForm.get('editorial')?.touched">
+      <div *ngIf="miForm.get('editorial')?.errors?.['required']">Editorial es obligatoria</div>
+    </div>
+  </div>
+  <div>
+    <label for="precio">Precio</label>
+    <input id="precio" type="number" formControlName="precio"/>
+    <div *ngIf="miForm.get('precio')?.invalid && miForm.get('precio')?.touched">
+      <div *ngIf="miForm.get('precio')?.errors?.['required']">Precio es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="stock">Stock</label>
+    <input id="stock" type="number" formControlName="stock"/>
+    <div *ngIf="miForm.get('stock')?.invalid && miForm.get('stock')?.touched">
+      <div *ngIf="miForm.get('stock')?.errors?.['required']">Stock es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="genero">Género</label>
+    <input id="genero" formControlName="genero"/>
+    <div *ngIf="miForm.get('genero')?.invalid && miForm.get('genero')?.touched">
+      <div *ngIf="miForm.get('genero')?.errors?.['required']">Género es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="anio">Año</label>
+    <input id="anio" type="number" formControlName="anio"/>
+    <div *ngIf="miForm.get('anio')?.invalid && miForm.get('anio')?.touched">
+      <div *ngIf="miForm.get('anio')?.errors?.['required']">Año es obligatorio</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="miForm.invalid">Actualizar</button>
+  <a routerLink="/comics"><button type="button">Cancelar</button></a>
+</form>
+
+<p *ngIf="mensaje">{{ mensaje }}</p>

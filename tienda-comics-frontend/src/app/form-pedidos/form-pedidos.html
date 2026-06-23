@@ -1,0 +1,33 @@
+<h2>Lista de Pedidos</h2>
+
+<button (click)="onListar()">Cargar Pedidos</button>
+<a routerLink="/registrar-pedido">
+  <button>Nuevo Pedido</button>
+</a>
+
+<p *ngIf="mensaje">{{ mensaje }}</p>
+
+<table *ngIf="pedidos.length > 0" border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Total</th>
+      <th>Estado</th>
+      <th>Cliente</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pedido of pedidos">
+      <td>{{ pedido.id }}</td>
+      <td>{{ pedido.fecha }}</td>
+      <td>{{ pedido.total }}</td>
+      <td>{{ pedido.estado }}</td>
+      <td>{{ pedido.clienteNombre }}</td>
+      <td>{{ pedido.clienteEmail }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="pedidos.length === 0 && mensaje === ''">No hay pedidos. Haz clic en "Cargar Pedidos".</p>

@@ -1,0 +1,44 @@
+<h2>Lista de Comics</h2>
+
+<button (click)="onListar()">Cargar Comics</button>
+<a routerLink="/registrar-comic">
+  <button>Nuevo Comic</button>
+</a>
+
+<p *ngIf="mensaje">{{ mensaje }}</p>
+
+<table *ngIf="comics.length > 0" border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Editorial</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Género</th>
+      <th>Año</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let comic of comics">
+      <td>{{ comic.id }}</td>
+      <td>{{ comic.titulo }}</td>
+      <td>{{ comic.autor }}</td>
+      <td>{{ comic.editorial }}</td>
+      <td>{{ comic.precio }}</td>
+      <td>{{ comic.stock }}</td>
+      <td>{{ comic.genero }}</td>
+      <td>{{ comic.anio }}</td>
+      <td>
+        <a [routerLink]="['/actualizar-comic', comic.id]">
+          <button>Editar</button>
+        </a>
+        <button (click)="onEliminar(comic.id!)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="comics.length === 0 && mensaje === ''">No hay comics. Haz clic en "Cargar Comics".</p>

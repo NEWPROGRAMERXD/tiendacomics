@@ -1,0 +1,49 @@
+<h2>Registrar Nuevo Pedido</h2>
+
+<form #miForm="ngForm" (ngSubmit)="onSubmit(miForm)" novalidate>
+  <div>
+    <label for="fecha">Fecha</label>
+    <input type="date" id="fecha" name="fecha" ngModel required #fecha="ngModel"/>
+    <div *ngIf="fecha.invalid && fecha.touched">
+      <div *ngIf="fecha.errors?.['required']">Fecha es obligatoria</div>
+    </div>
+  </div>
+  <div>
+    <label for="total">Total</label>
+    <input type="number" id="total" name="total" ngModel required #total="ngModel"/>
+    <div *ngIf="total.invalid && total.touched">
+      <div *ngIf="total.errors?.['required']">Total es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="estado">Estado</label>
+    <select id="estado" name="estado" ngModel required #estado="ngModel">
+      <option value="">-- Selecciona --</option>
+      <option value="PENDIENTE">PENDIENTE</option>
+      <option value="ENVIADO">ENVIADO</option>
+      <option value="ENTREGADO">ENTREGADO</option>
+    </select>
+    <div *ngIf="estado.invalid && estado.touched">
+      <div *ngIf="estado.errors?.['required']">Estado es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="clienteNombre">Nombre del Cliente</label>
+    <input type="text" id="clienteNombre" name="clienteNombre" ngModel required #clienteNombre="ngModel"/>
+    <div *ngIf="clienteNombre.invalid && clienteNombre.touched">
+      <div *ngIf="clienteNombre.errors?.['required']">Nombre es obligatorio</div>
+    </div>
+  </div>
+  <div>
+    <label for="clienteEmail">Email del Cliente</label>
+    <input type="email" id="clienteEmail" name="clienteEmail" ngModel required #clienteEmail="ngModel"/>
+    <div *ngIf="clienteEmail.invalid && clienteEmail.touched">
+      <div *ngIf="clienteEmail.errors?.['required']">Email es obligatorio</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="miForm.invalid">Registrar Pedido</button>
+  <a routerLink="/pedidos"><button type="button">Cancelar</button></a>
+</form>
+
+<p *ngIf="mensaje">{{ mensaje }}</p>
