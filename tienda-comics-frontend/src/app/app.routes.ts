@@ -8,10 +8,10 @@ import { FormRegistrarPedido } from './form-registrar-pedido/form-registrar-pedi
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'login', component: FormLogin, title: 'Login' },
-    { path: 'comics', component: FormComics, title: 'Comics' },
-    { path: 'registrar-comic', component: FormRegistrarComic, title: 'Registrar Comic' },
-    { path: 'actualizar-comic/:id', component: FormActualizarComic, title: 'Actualizar Comic' },
+    { path: 'login', component: FormLogin, title: 'TiendaComics' },
+    { path: 'comics', component: FormComics, title: 'TiendaComics' },
+    { path: 'registrar-comic', component: FormRegistrarComic, title: 'TiendaComics' },
+    { path: 'actualizar-comic/:id', component: FormActualizarComic, title: 'TiendaComics' },
     { path: 'pedidos', component: FormPedidos, title: 'Pedidos' },
-    { path: 'registrar-pedido', component: FormRegistrarPedido, title: 'Registrar Pedido' },
+    { path: 'registrar-pedido', component: FormRegistrarPedido, title: 'TiendaComics' },
 ];
