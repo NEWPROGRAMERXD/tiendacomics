@@ -28,6 +28,7 @@ export class FormRegistrarPedido implements OnInit {
 
   onComicChange(id: number) {
     this.comicSeleccionado = this.comics.find(c => c.id == id) || null;
+    this.cantidad = 1;
   }
 
   calcularTotal(): number {
@@ -36,6 +37,14 @@ export class FormRegistrarPedido implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    if (!this.comicSeleccionado) return;
+
+    // Verificar stock
+    if (this.cantidad > this.comicSeleccionado.stock) {
+      this.mensaje = 'No hay suficiente stock disponible';
+      return;
+    }
+
     const pedido = {
       fecha: form.value.fecha,
       total: this.calcularTotal(),
@@ -43,10 +52,25 @@ export class FormRegistrarPedido implements OnInit {
       clienteNombre: form.value.clienteNombre,
       clienteEmail: form.value.clienteEmail
     };
+
+    // 1. Crear el pedido
     this.tiendaService.crearPedido(pedido).subscribe({
       next: () => {
-        this.mensaje = '¡Pedido registrado correctamente!';
-        this.router.navigate(['/pedidos']);
+        // 2. Actualizar stock del comic
+        const comicActualizado: Comic = {
+          ...this.comicSeleccionado!,
+          stock: this.comicSeleccionado!.stock - this.cantidad
+        };
+        this.tiendaService.actualizarComic(
+          this.comicSeleccionado!.id!, 
+          comicActualizado
+        ).subscribe({
+          next: () => {
+            this.mensaje = '¡Pedido registrado y stock actualizado!';
+            this.router.navigate(['/pedidos']);
+          },
+          error: (err) => console.error('Error al actualizar stock:', err)
+        });
       },
       error: (err) => {
         console.error('Error:', err);
